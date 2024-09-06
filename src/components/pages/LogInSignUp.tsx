@@ -4,7 +4,7 @@ import SignUp from '../account/SignUp'
 
 const LogInSignUp = () => {
   return (
-    <section>
+    <section className='flex justify-center items-center h-screen'>
         <SignUp />
     </section>
   )

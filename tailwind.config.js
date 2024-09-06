@@ -8,6 +8,9 @@ export default {
     extend: {
       screens: {
         "xs": {"max": "639px"},
+      },
+      colors: {
+        "pastel-purple": "#907AD6",
       }
     },
   },
