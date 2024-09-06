@@ -23,7 +23,7 @@ const SignUp = () => {
     }
     return (
     <>
-        <section className='flex flex-col p-4 bg-neutral-50 gap-2 w-1/3 rounded-md'>
+        <section className='flex flex-col gap-2 p-4 bg-neutral-50 w-11/12 md:w-9/12 lg:w-1/3 rounded-md'>
             <h1 className='text-neutral-600 text-3xl text-center'>Sign Up</h1>
             <form onSubmit={handleFormSubmit} className='flex flex-col gap-2'>
                 <input type="text" name="username" value={username} onChange={handleUsernameInput} placeholder='Enter a username' className='text-sm text-neutral-500 box-border border-2 border-neutral-400 rounded-md py-1'/>
