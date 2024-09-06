@@ -1,11 +1,11 @@
 import React from 'react'
 import SignIn from '../account/SignIn'
-//import SignUp from '../account/SignUp'
+import SignUp from '../account/SignUp'
 
 const LogInSignUp = () => {
   return (
     <section>
-        <SignIn />
+        <SignUp />
     </section>
   )
 }
