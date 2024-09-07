@@ -4,8 +4,8 @@ import SignUp from '../account/SignUp'
 
 const LogInSignUp = () => {
   return (
-    <section className='flex justify-center items-center h-screen'>
-        <SignUp />
+    <section className='absolute w-full flex justify-center items-center h-screen'>
+        <SignIn />
     </section>
   )
 }

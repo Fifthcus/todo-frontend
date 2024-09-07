@@ -15,14 +15,19 @@ const SignIn = () => {
   }
   return (
     <>
-      <section className='flex flex-col gap-2 p-4 bg-neutral-50 w-11/12 md:w-9/12 lg:w-1/3'>
-        <h1 className='text-neutral-600 text-3xl text-center'>Sign In</h1>
-        <form onSubmit={handleFormSubmit} className='flex flex-col gap-2'>
-          <input type="email" name="email" value={email} onChange={handleEmailInput} placeholder='Enter an email' className='text-sm text-neutral-500 box-border border-2 border-neutral-400 rounded-md py-1'/>
-          <input type="password" name="password" value={password} onChange={handlePasswordInput} placeholder='Enter a password' className='text-sm text-neutral-500 box-border border-2 border-neutral-400 rounded-md py-1'/>
-          <button className='text-neutral-50 box-border bg-pastel-purple border-pastel-purple border-2 rounded-md py-1'>Sign In</button>
-        </form>
-        <p className='text-center text-neutral-500 cursor-pointer hover:underline'>Have an account?</p>
+      <section className='flex flex-col items-center gap-2 w-full'>
+        <section className='flex flex-col items-center gap-2 w-full'></section>
+        <section className='flex flex-col gap-2 p-4 bg-neutral-50 w-11/12 md:w-7/12 lg:w-1/3 rounded-md'>
+          <h1 className='text-neutral-600 text-3xl text-center'>Sign In</h1>
+          <form onSubmit={handleFormSubmit} className='flex flex-col gap-2'>
+            <input type="email" name="email" value={email} onChange={handleEmailInput} placeholder='Enter an email' className='text-sm text-neutral-500 box-border border-2 border-neutral-400 rounded-md py-1'/>
+            <input type="password" name="password" value={password} onChange={handlePasswordInput} placeholder='Enter a password' className='text-sm text-neutral-500 box-border border-2 border-neutral-400 rounded-md py-1'/>
+            <button className='text-neutral-50 box-border bg-pastel-purple border-pastel-purple border-2 rounded-md py-1'>Sign In</button>
+          </form>
+        </section>
+        <section className='p-4 bg-neutral-50 w-11/12 md:w-7/12 lg:w-1/3 rounded-md'>
+          <p className='text-neutral-600 text-center cursor-pointer hover:underline'>Create an account?</p>
+        </section>
       </section>
     </>
   )
