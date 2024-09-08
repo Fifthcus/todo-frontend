@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import useSignIntoAccount from '../hooks/useSignIntoAccount';
 
 interface SignInProps {
   handleClick: (isOpen: boolean) => void,
@@ -16,8 +17,12 @@ const SignIn: React.FC<SignInProps> = ({ handleClick }) => {
   }
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("YOU ARE SIGNED IN");
-  }
+    const signInObj = {
+        email,
+        password,
+    }
+    useSignIntoAccount(signInObj);
+}
   return (
     <>
       <section className='flex flex-col items-center gap-2 w-full'>
