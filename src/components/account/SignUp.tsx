@@ -1,6 +1,10 @@
 import React, {useState} from 'react'
 
-const SignUp = () => {
+interface SignUpProps {
+    handleClick: (isOpen: boolean) => void,
+  }
+
+const SignUp: React.FC<SignUpProps> = ({ handleClick }) => {
     const [username, setUsername] = useState("");
     const handleUsernameInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value);
@@ -37,7 +41,7 @@ const SignUp = () => {
                 </form>
             </section>
             <section className='p-4 bg-neutral-50 w-11/12 md:w-7/12 lg:w-1/3 rounded-md'>
-                <p className='text-neutral-600 text-center cursor-pointer hover:underline'>Have an account?</p>
+                <p onClick={() => {handleClick(true)}} className='text-neutral-600 text-center cursor-pointer hover:underline'>Have an account?</p>
             </section>
         </section>
     </>

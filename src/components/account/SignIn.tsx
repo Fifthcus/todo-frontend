@@ -1,6 +1,11 @@
 import React, {useState} from 'react'
 
-const SignIn = () => {
+interface SignInProps {
+  handleClick: (isOpen: boolean) => void,
+}
+
+//This is annotated the way it is to ensure the components props are inferred and eforces the type of a components props.
+const SignIn: React.FC<SignInProps> = ({ handleClick }) => {
   const [email, setEmail] = useState("");
   const handleEmailInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -26,7 +31,7 @@ const SignIn = () => {
           </form>
         </section>
         <section className='p-4 bg-neutral-50 w-11/12 md:w-7/12 lg:w-1/3 rounded-md'>
-          <p className='text-neutral-600 text-center cursor-pointer hover:underline'>Create an account?</p>
+          <p onClick={() => {handleClick(false)}} className='text-neutral-600 text-center cursor-pointer hover:underline'>Create an account?</p>
         </section>
       </section>
     </>
