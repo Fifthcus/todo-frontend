@@ -12,7 +12,7 @@ const CreateAccount = async (newAccount: newAccountObj) => {
         const response = await fetch("http://localhost:3000/user", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({username: newAccount.username, email: newAccount.email, password: newAccount.password}),
+            body: JSON.stringify({username: newAccount.username, email: newAccount.email, password: newAccount.password, salt: null, jwtrefresh: null}),
         });
         const json = await response.json();
         return json;
