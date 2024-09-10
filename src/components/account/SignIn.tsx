@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
-import useSignIntoAccount from '../hooks/useSignIntoAccount';
+import useSignIntoAccount from './useSignIntoAccount';
 
 interface SignInProps {
   handleClick: (isOpen: boolean) => void,
 }
 
 //This is annotated the way it is to ensure the components props are inferred and eforces the type of a components props.
-const SignIn: React.FC<SignInProps> = ({ handleClick }) => {
+  const SignIn: React.FC<SignInProps> = ({ handleClick }) => {
   const [email, setEmail] = useState("");
   const handleEmailInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -22,7 +22,7 @@ const SignIn: React.FC<SignInProps> = ({ handleClick }) => {
         password,
     }
     useSignIntoAccount(signInObj);
-}
+  }
   return (
     <>
       <section className='flex flex-col items-center gap-2 w-full'>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import useCreateAccount from '../hooks/useCreateAccount';
+import CreateAccount from './CreateAccount';
 
 interface SignUpProps {
     handleClick: (isOpen: boolean) => void,
@@ -22,7 +22,16 @@ const SignUp: React.FC<SignUpProps> = ({ handleClick }) => {
     const handleVerifyPasswordInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setVerifyPassword(event.target.value);
     }
-    const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    /*
+    
+    
+    
+    Add error messages with the json returned from server.
+    
+    
+    */
+    const [json, setJson] = useState({});
+    const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const newAccount = {
             username,
@@ -30,7 +39,8 @@ const SignUp: React.FC<SignUpProps> = ({ handleClick }) => {
             password,
             verifyPassword,
         }
-        useCreateAccount(newAccount);
+        const json = await CreateAccount(newAccount);
+        setJson(json);
     }
     return (
     <>
