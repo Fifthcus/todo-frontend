@@ -1,4 +1,4 @@
-import LogInSignUp from "./components/pages/LogInSignUp"
+import LogInSignUp from "./LogInSignUp"
 const App = () => {
   return (
     <>

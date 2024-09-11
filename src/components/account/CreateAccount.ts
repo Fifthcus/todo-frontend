@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 interface newAccountObj {
     username: string,
     email: string
@@ -9,7 +7,7 @@ interface newAccountObj {
 
 const CreateAccount = async (newAccount: newAccountObj) => {
     try{
-        const response = await fetch("http://localhost:3000/user", {
+        const response = await fetch("http://localhost:3000/user/signup", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({username: newAccount.username, email: newAccount.email, password: newAccount.password, salt: null, jwtrefresh: null}),

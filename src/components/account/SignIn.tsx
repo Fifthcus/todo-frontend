@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import useSignIntoAccount from './useSignIntoAccount';
+import SignIntoAccount from './SignIntoAccount';
 
 interface SignInProps {
   handleClick: (isOpen: boolean) => void,
@@ -21,7 +21,7 @@ interface SignInProps {
         email,
         password,
     }
-    useSignIntoAccount(signInObj);
+    SignIntoAccount(signInObj);
   }
   return (
     <>
