@@ -7,10 +7,12 @@ interface newAccountObj {
 
 const CreateAccount = async (newAccount: newAccountObj) => {
     try{
-        const response = await fetch("http://localhost:3000/user/signup", {
+        const response = await fetch("http://localhost:3000/user", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({username: newAccount.username, email: newAccount.email, password: newAccount.password, salt: null, jwtrefresh: null}),
+            credentials: "include",
+            body: JSON.stringify({username: newAccount.username, email: newAccount.email, password: newAccount.password},
+            ),
         });
         const json = await response.json();
         return json;

@@ -1,11 +1,18 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import CreateAccount from './CreateAccount';
+import { AuthContext } from '../../contexts/UserAuth';
+import { useNavigate } from 'react-router-dom';
 
 interface SignUpProps {
     handleClick: (isOpen: boolean) => void,
-  }
+}
+interface JsonResponse {
+    message: string
+}
 
 const SignUp: React.FC<SignUpProps> = ({ handleClick }) => {
+   
+    // Collecting user data.
     const [username, setUsername] = useState("");
     const handleUsernameInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value);
@@ -22,15 +29,18 @@ const SignUp: React.FC<SignUpProps> = ({ handleClick }) => {
     const handleVerifyPasswordInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setVerifyPassword(event.target.value);
     }
-    /*
-    
-    
-    
-    Add error messages with the json returned from server.
-    
-    
-    */
-    const [json, setJson] = useState({});
+
+    //Collects error messages from backend. Renders those error messages to display.
+    const [json, setJson] = useState<JsonResponse | null>(null);
+    const navigate = useNavigate();
+
+    //Consume context - if statement needed to prevent error related to typescript now knowing if "user, login, and logout" exists in UserAuth.tsx
+    const authContext = useContext(AuthContext);
+    if (!authContext) {
+        throw new Error("useContext must be used within an AuthProvider");
+    }
+    const {login} = authContext;
+
     const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const newAccount = {
@@ -40,13 +50,19 @@ const SignUp: React.FC<SignUpProps> = ({ handleClick }) => {
             verifyPassword,
         }
         const json = await CreateAccount(newAccount);
-        setJson(json);
+        if(!json.message){
+            setJson(json);
+        }
+        //Sets user email so this data can be consumed in other components.
+        login(email);
+        navigate("../dashboard");
     }
     return (
     <>
         <section className='flex flex-col items-center gap-2 w-full'>
             <section className='flex flex-col gap-2 p-4 bg-neutral-50 w-11/12 md:w-7/12 lg:w-1/3 rounded-md'>
                 <h1 className='text-neutral-600 text-3xl text-center'>Sign Up</h1>
+                {json ? <p className='text-center text-red-500'>{json.message}</p> : null}
                 <form onSubmit={handleFormSubmit} className='flex flex-col gap-2'>
                     <input type="text" name="username" value={username} onChange={handleUsernameInput} placeholder='Enter a username' className='text-sm text-neutral-500 box-border border-2 border-neutral-400 rounded-md py-1'/>
                     <input type="email" name="email" value={email} onChange={handleEmailInput} placeholder='Enter an email' className='text-sm text-neutral-500 box-border border-2 border-neutral-400 rounded-md py-1'/>

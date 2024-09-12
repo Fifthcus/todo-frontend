@@ -7,7 +7,7 @@ const routes = [
         element: <App />
     },
     {
-        path: "/api/dashboard",
+        path: "/dashboard",
         element: <Dashboard />
     }
 ];
