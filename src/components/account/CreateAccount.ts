@@ -5,14 +5,13 @@ interface newAccountObj {
     verifyPassword: string,
 }
 
-const CreateAccount = async (newAccount: newAccountObj) => {
+const CreateAccount = async (account: newAccountObj) => {
     try{
-        const response = await fetch("http://localhost:3000/user", {
+        const response = await fetch("http://localhost:3000/user/signup", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             credentials: "include",
-            body: JSON.stringify({username: newAccount.username, email: newAccount.email, password: newAccount.password},
-            ),
+            body: JSON.stringify({username: account.username, email: account.email, password: account.password}),
         });
         const json = await response.json();
         return json;
