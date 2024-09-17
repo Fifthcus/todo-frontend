@@ -5,19 +5,26 @@ interface newAccountObj {
     verifyPassword: string,
 }
 
-const CreateAccount = async (account: newAccountObj) => {
+interface ServerResponse {
+    message: string,
+    statusCode: number
+}
+
+const CreateAccount = async (account: newAccountObj): Promise<ServerResponse> => {
     try{
-        const response = await fetch("http://localhost:3000/user/signup", {
+        const request = await fetch("http://localhost:3000/user/signup", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             credentials: "include",
             body: JSON.stringify({username: account.username, email: account.email, password: account.password}),
         });
-        const json = await response.json();
-        return json;
+        const response = await request.json();
+        console.log(response);
+        return {message: response.message, statusCode: request.status};
     } catch(error: any) {
         console.log(error);
     }
+    return {message: "An unexpected error has occured.", statusCode: 500};
 }
 
 export default CreateAccount

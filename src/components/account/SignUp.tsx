@@ -48,17 +48,13 @@ const SignUp: React.FC<SignUpProps> = ({ handleClick }) => {
             password,
             verifyPassword,
         }
-        const json = await CreateAccount(newAccount);
-        if(!json){
-            throw new Error("An error occured trying to sign into your account.");
-          }
-        if(json.message){
-            setMessage(json.message);
-        }
-        //Sets user email so this data can be consumed in other components.
-        if(json.statusCode === 200){
+        const response = await CreateAccount(newAccount);
+        if(response && response.statusCode === 201){
             login(email);
             navigate("../dashboard");
+        }
+        if(response.statusCode !== 201){
+            setMessage(response.message);
         }
     }
     return (

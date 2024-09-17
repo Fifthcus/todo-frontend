@@ -2,11 +2,11 @@ interface signInObj {
     email: string
     password: string,
 }
-interface resObj {
+interface ServerResponse {
     message: string,
     statusCode: number
 }
-const SignIntoAccount = async (account: signInObj) => {
+const SignIntoAccount = async (account: signInObj): Promise<ServerResponse> => {
     try{
         const response = await fetch("http://localhost:3000/user/signin", {
             method: "POST",
@@ -15,11 +15,11 @@ const SignIntoAccount = async (account: signInObj) => {
             body: JSON.stringify({email: account.email, password: account.password}),
         });
         const json: {message: string} = await response.json();
-        const resObj: resObj = {message: json.message, statusCode: response.status};
-        return resObj;
+        return {message: json.message, statusCode: response.status};
     } catch(error: any) {
         console.log(error);
     }
+    return {message: "An unexpected error has occured.", statusCode: 500};
 }
 
 export default SignIntoAccount
