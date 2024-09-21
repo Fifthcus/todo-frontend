@@ -18,8 +18,9 @@ const SignIntoAccount = async (account: signInObj): Promise<ServerResponse> => {
         return {message: json.message, statusCode: response.status};
     } catch(error: any) {
         console.log(error);
+    } finally {
+        return {message: "An unexpected error has occured.", statusCode: 500};
     }
-    return {message: "An unexpected error has occured.", statusCode: 500};
 }
 
 export default SignIntoAccount

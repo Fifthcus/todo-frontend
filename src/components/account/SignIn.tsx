@@ -36,11 +36,11 @@ interface SignInProps {
       password,
     }
     const response = await SignIntoAccount(signInObj);
-    if(response && response.statusCode === 201){
+    if(response && response.statusCode === 200){
       login(email);
       navigate("../dashboard");
     }
-    if(response.statusCode !== 201){
+    if(response.statusCode !== 200){
         setMessage(response.message);
     }
   }
