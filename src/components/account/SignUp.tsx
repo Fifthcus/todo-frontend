@@ -1,13 +1,13 @@
 import React, {useState, useContext} from 'react'
-import CreateAccount from './CreateAccount';
 import { AuthContext } from '../../contexts/UserAuth';
 import { useNavigate } from 'react-router-dom';
+import AccountSignUp from './AccountSignUp';
 
 interface SignUpProps {
     handleClick: (isOpen: boolean) => void,
 }
 
-const SignUp: React.FC<SignUpProps> = ({ handleClick }) => {
+const SignUp = ({ handleClick }: SignUpProps) => {
    
     // Collecting user data.
     const [username, setUsername] = useState("");
@@ -27,9 +27,6 @@ const SignUp: React.FC<SignUpProps> = ({ handleClick }) => {
         setVerifyPassword(event.target.value);
     }
 
-    //Collects error messages from backend. Renders those error messages to display.
-    const [message, setMessage] = useState("");
-
      //Navigate away and into the dashboard.
     const navigate = useNavigate();
 
@@ -40,21 +37,19 @@ const SignUp: React.FC<SignUpProps> = ({ handleClick }) => {
     }
     const {login} = authContext;
 
+    const [message, setMessage] = useState("");
+
     const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const newAccount = {
-            username,
-            email,
-            password,
-            verifyPassword,
-        }
-        const response = await CreateAccount(newAccount);
-        if(response && response.statusCode === 201){
+        const newAccount = { username, email, password, verifyPassword }
+
+        const response = await AccountSignUp(newAccount);
+        if(response && response.ok){
             login(email);
             navigate("../dashboard");
         }
-        if(response.statusCode !== 201){
-            setMessage(response.message);
+        if(response.error){
+            setMessage(response.error);
         }
     }
     return (

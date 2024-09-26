@@ -1,49 +1,49 @@
 import React, {useState, useContext} from 'react'
-import SignIntoAccount from './SignIntoAccount';
 import { AuthContext } from '../../contexts/UserAuth';
 import { useNavigate } from 'react-router-dom';
+import AccountSignIn from './AccountSignIn';
 
-interface SignInProps {
+interface SignUpProps {
   handleClick: (isOpen: boolean) => void,
 }
 
 //This is annotated the way it is to ensure the components props are inferred and eforces the type of a components props.
-  const SignIn: React.FC<SignInProps> = ({ handleClick }) => {
-  const [email, setEmail] = useState("");
-  const handleEmailInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  }
-  const [password, setPassword] = useState("");
-  const handlePasswordInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  }
-  const [message, setMessage] = useState("");
-
-  //Navigate away and into the dashboard.
-  const navigate = useNavigate();
-
-   //Consume context - if statement needed to prevent error related to typescript now knowing if "user, login, and logout" exists in UserAuth.tsx
-  const authContext = useContext(AuthContext);
-  if (!authContext) {
-    throw new Error("useContext must be used within an AuthProvider");
-  }
-  const {login} = authContext;
-
-  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const signInObj = {
-      email,
-      password,
+  const SignIn = ({ handleClick }: SignUpProps) => {
+    const [email, setEmail] = useState("");
+    const handleEmailInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setEmail(event.target.value);
     }
-    const response = await SignIntoAccount(signInObj);
-    if(response && response.statusCode === 200){
-      login(email);
-      navigate("../dashboard");
+    const [password, setPassword] = useState("");
+    const handlePasswordInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword(event.target.value);
     }
-    if(response.statusCode !== 200){
-        setMessage(response.message);
+
+    //Navigate away and into the dashboard.
+    const navigate = useNavigate();
+
+    //Consume context - if statement needed to prevent error related to typescript now knowing if "user, login, and logout" exists in UserAuth.tsx
+    const authContext = useContext(AuthContext);
+    if (!authContext) {
+      throw new Error("useContext must be used within an AuthProvider");
     }
-  }
+    const {login} = authContext;
+
+    const [message, setMessage] = useState("");
+
+    const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const signInObj = { email, password }
+
+      const response = await AccountSignIn(signInObj);
+
+      if(response && response.ok){
+        login(email);
+        navigate("../dashboard");
+      }
+      if(response.error){
+          setMessage(response.error);
+      }
+    }
   return (
     <>
       <section className='flex flex-col items-center gap-2 w-full'>
@@ -62,7 +62,6 @@ interface SignInProps {
         </section>
       </section>
     </>
-  )
+  );
 }
-
 export default SignIn
