@@ -27,7 +27,7 @@ const SignUp = ({ handleClick }: SignUpProps) => {
         setVerifyPassword(event.target.value);
     }
 
-     //Navigate away and into the dashboard.
+    //Programatically navigate away to other components.
     const navigate = useNavigate();
 
     //Consume context - if statement needed to prevent error related to typescript now knowing if "user, login, and logout" exists in UserAuth.tsx

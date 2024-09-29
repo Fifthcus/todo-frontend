@@ -1,30 +1,33 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { AuthContext } from '../../contexts/UserAuth';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 
 const Dashboard = () => {
-
-  /*
-
-
-  In previous weather project, I experienced an issue I don't remember how to duplicate, where I couldn't persist userdata "set" in the AuthContext file.
-
-
-  If statement needed to prevent error related to typescript now knowing if "user, login, and logout" exists in UserAuth.tsx
-
 
   const authContext = useContext(AuthContext);
   if (!authContext) {
     throw new Error("useContext must be used within an AuthProvider");
   }
-  const {user} = authContext;
+  const {user, logout} = authContext;
+  //If use is not logged in, redirect them back to login.
+  //Programatically navigate away to other components.
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(!user){
+      navigate("../");
+    }
+  },[]);
+  const handleLogout = () => {
+    logout();
+    navigate("../");
+  }
   console.log(user);
-
-  
-  */
 
   return (
     <section>
         <h2>Welcome</h2>
+        <button onClick={handleLogout}>Logout</button>
     </section>
   )
 }
