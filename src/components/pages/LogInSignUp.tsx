@@ -1,8 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import SignIn from '../account/SignIn'
 import SignUp from '../account/SignUp'
-import { AuthContext } from '../../contexts/UserAuth'
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 
 const LogInSignUp = () => {
     const [isSignInOpen, setIsSignInOpen] = useState(true);
@@ -11,11 +11,7 @@ const LogInSignUp = () => {
     }
     //Programatically navigate away to other components.
     const navigate = useNavigate();
-    const authContext = useContext(AuthContext);
-    if (!authContext) {
-        throw new Error("useContext must be used within an AuthProvider");
-    }
-    const { user } = authContext;
+    const { user } = useAuth();
     useEffect(() => {
         if(user){
             navigate("../dashboard");

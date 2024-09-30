@@ -1,15 +1,10 @@
-import { useContext, useEffect } from 'react'
-import { AuthContext } from '../../contexts/UserAuth';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 const Dashboard = () => {
 
-  const authContext = useContext(AuthContext);
-  if (!authContext) {
-    throw new Error("useContext must be used within an AuthProvider");
-  }
-  const {user, logout} = authContext;
+  const {user, logout} = useAuth();
   //If use is not logged in, redirect them back to login.
   //Programatically navigate away to other components.
   const navigate = useNavigate();

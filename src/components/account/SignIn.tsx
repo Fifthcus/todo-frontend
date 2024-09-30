@@ -1,7 +1,7 @@
-import React, {useState, useContext} from 'react'
-import { AuthContext } from '../../contexts/UserAuth';
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import AccountSignIn from './AccountSignIn';
+import { useAuth } from '../../hooks/useAuth';
 
 interface SignUpProps {
   handleClick: (isOpen: boolean) => void,
@@ -21,12 +21,7 @@ interface SignUpProps {
     //Programatically navigate away to other components.
     const navigate = useNavigate();
 
-    //Consume context - if statement needed to prevent error related to typescript now knowing if "user, login, and logout" exists in UserAuth.tsx
-    const authContext = useContext(AuthContext);
-    if (!authContext) {
-      throw new Error("useContext must be used within an AuthProvider");
-    }
-    const {login} = authContext;
+    const {login} = useAuth();
 
     const [message, setMessage] = useState("");
 
