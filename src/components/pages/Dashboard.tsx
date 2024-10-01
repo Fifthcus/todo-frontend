@@ -8,11 +8,6 @@ const Dashboard = () => {
   //If use is not logged in, redirect them back to login.
   //Programatically navigate away to other components.
   const navigate = useNavigate();
-  useEffect(() => {
-    if(!user){
-      navigate("../");
-    }
-  },[]);
   const handleLogout = () => {
     logout();
     navigate("../");
