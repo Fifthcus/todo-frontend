@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import Nav from '../utils/Nav';
 
 const Dashboard = () => {
 
@@ -12,12 +12,10 @@ const Dashboard = () => {
     logout();
     navigate("../");
   }
-  console.log(user);
 
   return (
-    <section>
-        <h2>Welcome</h2>
-        <button onClick={handleLogout}>Logout</button>
+    <section className='h-screen flex-col'>
+      <Nav />
     </section>
   )
 }
