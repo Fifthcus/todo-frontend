@@ -1,11 +1,18 @@
 import React from 'react'
 
-const List = (): JSX.Element => {
-    const list = [1,2,3];
+interface ComponentProps {
+    list: ListItemObject[]
+}
+interface ListItemObject {
+    id: number,
+    list_item: string,
+}
+
+const List = ({list}: ComponentProps) => {
     return (
         <ul>
             {list.map(item => {
-                return(<li>{item}</li>);
+                return(<li key={item.id}>{item.list_item}</li>);
             })}
         </ul>
     );
