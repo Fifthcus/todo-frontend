@@ -12,11 +12,12 @@ const AddTask = ({list, setList}: any) => {
             setList({id: 1, list_item: taskInput});
         }
         setList([...list, {id: id_of_last_index + 1, list_item: taskInput}]);
+        setTaskInput("");
     };
   return (
-    <form onSubmit={handleClick}>
-        <input type="text" name="list_text" onChange={handleTaskInputChange} value={taskInput} placeholder="Enter a task." />
-        <button>Add Task</button>
+    <form className="flex flex-col lg:flex-row items-center gap-2.5 w-full py-4 xs:px-10 sm:px-14 md:px-18 lg:px-22" onSubmit={handleClick}>
+        <input type="text" name="list_text" onChange={handleTaskInputChange} value={taskInput} className="py-2.5 w-full border-2 border-gray-500 rounded-lg" placeholder="Enter a task." />
+        <button className='w-full lg:w-4/12 text-neutral-50 bg-pastel-purple border-2 border-pastel-purple rounded-lg py-2.5'>Add Task</button>
     </form>
   )
 };

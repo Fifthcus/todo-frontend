@@ -26,11 +26,13 @@ const Dashboard = () => {
   return (
     <section className='h-screen flex flex-col'>
       <Nav />
-      <section className='flex-grow'>
-        <List list={list}/>
-      </section>
-      <section>
-        <AddTask list={list} setList={setList}/>
+      <section className='flex flex-col flex-grow'>
+        <section className='flex-grow'>
+          <List list={list}/>
+        </section>
+        <section className='flex justify-center pb-5'>
+          <AddTask list={list} setList={setList}/>
+        </section>
       </section>
     </section>
   )
