@@ -2,8 +2,8 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import Nav from '../utils/Nav';
-import List from '../utils/List';
-import AddTask from '../utils/AddTask';
+import List from '../utils/lists/List';
+import AddTask from '../utils/lists/AddTask';
 import useFetchList from '../../hooks/useFetchList';
 
 const Dashboard = () => {
@@ -26,11 +26,11 @@ const Dashboard = () => {
   return (
     <section className='h-screen flex flex-col'>
       <Nav />
-      <section className='flex flex-col flex-grow'>
+      <section className='flex flex-col flex-grow w-full md:w-11/12 lg:w-10/12 self-center p-10'>
         <section className='flex-grow'>
-          <List list={list}/>
+          <List list={list} user={user}/>
         </section>
-        <section className='flex justify-center pb-5'>
+        <section className='flex'>
           <AddTask list={list} setList={setList}/>
         </section>
       </section>
