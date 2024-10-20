@@ -21,7 +21,7 @@ const Dashboard = () => {
     navigate("../");
   }
 
-  const [list, setList] = useState([{id: 1, list_item: "test"}]);
+  const [list, setList] = useState([{id: 1, list_item: "Task 1"}]);
 
   return (
     <section className='h-screen flex flex-col'>
@@ -30,7 +30,7 @@ const Dashboard = () => {
         <section className='flex-grow'>
           <List list={list} user={user}/>
         </section>
-        <section className='flex'>
+        <section className='flex' data-testid="add-task">
           <AddTask list={list} setList={setList}/>
         </section>
       </section>

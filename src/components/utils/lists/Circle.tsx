@@ -1,18 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Circle = () => {
+const Circle = (): JSX.Element => {
+    const [circleFilled, setCircleFilled] = useState(false);
     const color = "#907AD6";
     const radius = 12.5;
-  return (
-    <svg width={radius * 2} height={radius * 2}>
-      <circle 
-        cx={radius} 
-        cy={radius} 
-        r={radius} 
-        fill={color} 
-      />
-    </svg>
-  )
+    const handleClick = () => {
+      if(circleFilled){
+        setCircleFilled(false);
+      }
+      if(!circleFilled){
+        setCircleFilled(true);
+      }
+    }
+    return(
+      <>
+      {circleFilled ? 
+        <svg onClick={handleClick} width={radius * 2} height={radius * 2}>
+          <circle 
+            cx={radius} 
+            cy={radius} 
+            r={10} 
+            stroke={color}
+            strokeWidth={2}
+            fill={color} 
+          />
+        </svg>:
+        <svg onClick={handleClick} width={radius * 2} height={radius * 2}>
+          <circle 
+            cx={radius} 
+            cy={radius} 
+            r={10} 
+            stroke={color}
+            strokeWidth={2}
+            fill={"none"} 
+          />
+        </svg>}
+      </>)
 }
 
 export default Circle
+
+/*<svg onClick={handleClick} width={radius * 2} height={radius * 2}>
+      <circle 
+        cx={radius} 
+        cy={radius} 
+        r={10} 
+        stroke={color}
+        strokeWidth={2}
+        fill={fill} 
+      />
+    </svg>*/
