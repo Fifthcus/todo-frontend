@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ListItem from './ListItem';
+import { useList } from '../../../hooks/useList';
 
 interface ComponentProps {
-    list: ListObject[],
     user: string,
 }
 interface ListObject {
@@ -10,13 +10,14 @@ interface ListObject {
     list_item: string,
 }
 
-const List = ({list, user}: ComponentProps) => {
+const List = ({user}: ComponentProps) => {
+    const { list } = useList();
     return (
         <>
             <h2 className="text-center text-2xl font-medium pb-10">{user}'s List</h2>
             <ul className='w-full' data-testid="task-list">
                 {list.map(item => {
-                    return <ListItem key={item.id} item={item}/>
+                    return <ListItem key={item.id} id={item.id} item={item}/>
                 })}
             </ul>
         </>

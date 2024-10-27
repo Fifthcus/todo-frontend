@@ -1,6 +1,8 @@
 import React, { useState }  from 'react';
+import { useList } from '../../../hooks/useList';
 
-const AddTask = ({list, setList}: any) => {
+const AddTask = () => {
+    const { list, addTaskToTodoList } = useList();
     const [taskInput, setTaskInput] = useState("");
     const handleTaskInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTaskInput(event.target.value);
@@ -9,9 +11,9 @@ const AddTask = ({list, setList}: any) => {
         event.preventDefault();
         const id_of_last_index = list[list.length - 1].id;
         if(!id_of_last_index){
-            setList({id: 1, list_item: taskInput});
+            addTaskToTodoList({id: 1, list_item: taskInput});
         }
-        setList([...list, {id: id_of_last_index + 1, list_item: taskInput}]);
+        addTaskToTodoList({id: id_of_last_index + 1, list_item: taskInput});
         setTaskInput("");
     };
   return (
