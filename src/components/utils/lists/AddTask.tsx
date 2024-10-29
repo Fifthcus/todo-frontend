@@ -2,7 +2,7 @@ import React, { useState }  from 'react';
 import { useList } from '../../../hooks/useList';
 
 const AddTask = () => {
-    const { list, addTaskToTodoList } = useList();
+    const { list, addTask } = useList();
     const [taskInput, setTaskInput] = useState("");
     const handleTaskInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTaskInput(event.target.value);
@@ -10,12 +10,15 @@ const AddTask = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if(!taskInput) return null;
-        const id_of_last_index = list[list.length - 1].id;
-        if(!id_of_last_index){
-            addTaskToTodoList({id: 1, list_item: taskInput});
+        if(list.length === 0){
+            addTask({id: 1, list_item: taskInput});
+            setTaskInput("");
         }
-        addTaskToTodoList({id: id_of_last_index + 1, list_item: taskInput});
-        setTaskInput("");
+        if(list.length >= 1){
+            const id_of_last_index = list[list.length - 1].id;
+            addTask({id: id_of_last_index + 1, list_item: taskInput});
+            setTaskInput("");
+        }
     };
   return (
     <form className="flex flex-col md:flex-row items-center gap-2.5 w-full" onSubmit={handleSubmit}>
