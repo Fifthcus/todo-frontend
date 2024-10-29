@@ -5,10 +5,6 @@ import { useList } from '../../../hooks/useList';
 interface ComponentProps {
     user: string,
 }
-interface ListObject {
-    id: number,
-    list_item: string,
-}
 
 const List = ({user}: ComponentProps) => {
     const { list } = useList();

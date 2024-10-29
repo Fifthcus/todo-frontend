@@ -15,7 +15,7 @@ const Circle = (): JSX.Element => {
     return(
       <>
       {circleFilled ? 
-        <svg onClick={handleClick} width={radius * 2} height={radius * 2}>
+        <svg className="cursor-pointer" onClick={handleClick} width={radius * 2} height={radius * 2}>
           <circle 
             cx={radius} 
             cy={radius} 
@@ -25,7 +25,7 @@ const Circle = (): JSX.Element => {
             fill={color} 
           />
         </svg>:
-        <svg onClick={handleClick} width={radius * 2} height={radius * 2}>
+        <svg className="cursor-pointer" onClick={handleClick} width={radius * 2} height={radius * 2}>
           <circle 
             cx={radius} 
             cy={radius} 
