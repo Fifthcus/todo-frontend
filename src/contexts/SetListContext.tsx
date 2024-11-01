@@ -8,7 +8,8 @@ interface SetListObj {
 }
 interface ListItemObject {
     id: number,
-    list_item: string,
+    isCompleted: boolean,
+    task: string,
 }
 interface SetListProps {
     children: React.ReactNode,
@@ -17,9 +18,9 @@ interface SetListProps {
 export const SetListContext = createContext<SetListObj | undefined>(undefined);
 
 export const SetListProvider: React.FC<SetListProps> = (props) => {
-    const [list, setList] = useState([{id: 1, list_item: "TASK 1"}]);
+    const [list, setList] = useState([{id: 1, isCompleted: true, task: "TASK 1"}, {id: 2, isCompleted: false, task: "TASK 2"}]);
     //Add a test to the todo list.
-    const addTask = (userObj: {id: number, list_item: string}) => {
+    const addTask = (userObj: {id: number, isCompleted: boolean, task: string}) => {
         setList([...list, {...userObj}]);
     }
     //With the filter method, delete a task from the todo list.

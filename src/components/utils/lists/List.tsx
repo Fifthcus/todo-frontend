@@ -12,8 +12,8 @@ const List = ({user}: ComponentProps) => {
         <>
             <h2 className="text-center text-2xl font-medium pb-10">{user}'s List</h2>
             <ul className='w-full' data-testid="task-list">
-                {list.map(item => {
-                    return <Task key={item.id} id={item.id} item={item}/>
+                {list.map(task => {
+                    return <Task key={task.id} id={task.id} task={task}/>
                 })}
             </ul>
         </>

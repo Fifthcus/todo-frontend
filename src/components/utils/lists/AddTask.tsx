@@ -11,12 +11,12 @@ const AddTask = () => {
         event.preventDefault();
         if(!taskInput) return null;
         if(list.length === 0){
-            addTask({id: 1, list_item: taskInput});
+            addTask({id: 1, isCompleted: false, task: taskInput});
             setTaskInput("");
         }
         if(list.length >= 1){
             const id_of_last_index = list[list.length - 1].id;
-            addTask({id: id_of_last_index + 1, list_item: taskInput});
+            addTask({id: id_of_last_index + 1, isCompleted: false, task: taskInput});
             setTaskInput("");
         }
     };
