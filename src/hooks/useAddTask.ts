@@ -16,8 +16,14 @@ const useFetchList = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const url = `http://localhost:3000/api/v1/${id}/list`;
-                const response = await fetch(url);
+                const url = `http://localhost:3000/api/v1/list/task`;
+                const response = await fetch(url, {
+                    method: "POST",
+                    credentials: "include",
+                    headers:{
+                        'Content-Type': 'application/json',
+                    },
+                });
                 const json = await response.json();
                 setList(json.list);
             } catch(error: any) {

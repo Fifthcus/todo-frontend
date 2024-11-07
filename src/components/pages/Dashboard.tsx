@@ -22,6 +22,7 @@ const Dashboard = () => {
       <section className='h-screen flex flex-col'>
         <Nav />
         <section className='flex flex-col flex-grow w-full md:w-11/12 lg:w-10/12 self-center p-10'>
+        <button onClick={handleLogout}>Logout</button>
           <section className='flex-grow'>
             <List username={user?.username}/>
           </section>
