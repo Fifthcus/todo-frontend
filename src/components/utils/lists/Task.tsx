@@ -41,7 +41,6 @@ const Task = ({task, id}: TaskProps) => {
         openCloseTaskOptionsMenu(event, false);
     }
     //Update circle list on whether or not a task is complete
-    const [isCompleted, setIsCompleted] = useState(task.isCompleted);
     const completeTask = (id: number, taskCompletionStatus: boolean) => {
         const newList = list.map((task) => {
             console.log(taskCompletionStatus);

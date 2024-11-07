@@ -1,11 +1,10 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { SetListProvider } from '../../contexts/SetListContext';
 import Nav from '../utils/Nav';
 import List from '../utils/lists/List';
 import AddTask from '../utils/lists/AddTask';
-import useFetchList from '../../hooks/useFetchList';
 
 const Dashboard = () => {
 
@@ -15,10 +14,8 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
-    navigate("../");
+    navigate("/");
   }
-
-  //const [list, setList] = useState([{id: 1, list_item: "Task 1"}]);
 
   return (
     <SetListProvider>
@@ -26,9 +23,9 @@ const Dashboard = () => {
         <Nav />
         <section className='flex flex-col flex-grow w-full md:w-11/12 lg:w-10/12 self-center p-10'>
           <section className='flex-grow'>
-            <List user={user}/>
+            <List username={user?.username}/>
           </section>
-          <section className='flex' data-testid="add-task">
+          <section className='flex'>
             <AddTask />
           </section>
         </section>

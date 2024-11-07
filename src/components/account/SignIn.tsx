@@ -32,7 +32,7 @@ interface SignUpProps {
       const response = await AccountSignIn(signInObj);
 
       if(response && response.ok){
-        login(email);
+        login(response.user);
         navigate("../dashboard");
       }
       if(response.error){

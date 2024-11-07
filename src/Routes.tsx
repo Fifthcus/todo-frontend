@@ -6,10 +6,7 @@ import PublicRoutes from "./components/private_routes/PublicRoutes";
 const routes = [
     {
         path: "/",
-        element: (
-        <PublicRoutes>
-            <App />
-        </PublicRoutes>),
+        element: <App />
     },
     {
         path: "/dashboard",

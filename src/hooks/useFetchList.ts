@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 
+interface ListItemObject {
+    id: number,
+    isCompleted: boolean,
+    task: string,
+}
+
 const useFetchList = () => {
-    const [list, setList] = useState<[]>([]);
+    const [list, setList] = useState<ListItemObject[]>([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     useEffect(() => {

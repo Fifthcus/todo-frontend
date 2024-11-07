@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import useFetchList from "../hooks/useFetchList";
 
 interface SetListObj {
     list: ListItemObject[],
@@ -18,10 +19,12 @@ interface SetListProps {
 export const SetListContext = createContext<SetListObj | undefined>(undefined);
 
 export const SetListProvider: React.FC<SetListProps> = (props) => {
-    const [list, setList] = useState([{id: 1, isCompleted: true, task: "TASK 1"}, {id: 2, isCompleted: false, task: "TASK 2"}]);
+    const fetchedData = useFetchList();
+    const fetchedList = fetchedData.list;
+    const [list, setList] = useState<ListItemObject[]>(fetchedList);
     //Add a test to the todo list.
-    const addTask = (userObj: {id: number, isCompleted: boolean, task: string}) => {
-        setList([...list, {...userObj}]);
+    const addTask = (taskObj: ListItemObject) => {
+        setList([...list, taskObj]);
     }
     //With the filter method, delete a task from the todo list.
     const deleteTask = (id: number) => {

@@ -5,6 +5,7 @@ interface signInObj {
 }
 interface ServerResponse {
     ok: boolean,
+    user?: any,
     statusCode: number,
     error: string,
 }
@@ -16,8 +17,8 @@ const AccountSignIn = async (account: signInObj): Promise<ServerResponse> => {
             credentials: "include",
             body: JSON.stringify({email: account.email, password: account.password}),
         });
-        const json: {message: string} = await response.json();
-        return {ok: response.ok, statusCode: response.status, error: json.message};
+        const json: {message: string, user: any} = await response.json();
+        return {ok: response.ok, user: json.user, statusCode: response.status, error: json.message};
     } catch(error: any) {
         console.error(error);
         return {ok: false, statusCode: 500, error: "An unexpected error occured."};

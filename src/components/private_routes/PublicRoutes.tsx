@@ -1,10 +1,18 @@
-import React from 'react'
-import { Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
-const PublicRoutes = ({children}: any) => {
-    const {user} = useAuth();
-    return user ? <Navigate to="/dashboard" /> : children;
+interface PrivateRoutesProps {
+    children: React.ReactNode;
 }
 
-export default PublicRoutes
+const PrivateRoutes = ({children}: PrivateRoutesProps) => {
+    const {isAuth} = useAuth();
+    if(isAuth) {
+        <Navigate to="../dashboard"/>
+    } else if(!isAuth) {
+        return 
+    }
+}
+
+export default PrivateRoutes
