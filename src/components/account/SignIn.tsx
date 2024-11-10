@@ -35,8 +35,8 @@ interface SignUpProps {
         login(response.user);
         navigate("../dashboard");
       }
-      if(response.error){
-          setMessage(response.error);
+      if(response.message){
+          setMessage(response.message);
       }
     }
   return (

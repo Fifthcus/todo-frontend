@@ -8,11 +8,11 @@ interface ComponentProps {
 }
 
 const List = ({username}: ComponentProps) => {
-    const { list, initList } = useList();
+    const { list, setList } = useList();
     const fetchedData = useFetchList();
     const fetchedList = fetchedData.list;
     useEffect(() => {
-        initList(fetchedList);
+        setList(fetchedList);
     },[]);
     return (
         <>

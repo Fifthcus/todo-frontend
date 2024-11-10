@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 interface SetListObj {
     list: ListItemObject[],
-    initList: ([]: ListItemObject[]) => void
+    setList: ([]: ListItemObject[]) => void,
     addTask: (userObj: ListItemObject) => void,
     deleteTask: (id: number) => void,
     updateTask: (newList: ListItemObject[]) => void,
@@ -20,10 +20,6 @@ export const SetListContext = createContext<SetListObj | undefined>(undefined);
 
 export const SetListProvider: React.FC<SetListProps> = (props) => {
     const [list, setList] = useState<ListItemObject[]>([]);
-    //Initial List
-    const initList = (list: ListItemObject[]) => {
-        setList(list);
-    }
     //Add a test to the todo list.
     const addTask = (taskObj: ListItemObject) => {
         setList([...list, taskObj]);
@@ -38,7 +34,7 @@ export const SetListProvider: React.FC<SetListProps> = (props) => {
         setList(newList);
     }
     return(
-        <SetListContext.Provider value={{list, initList, addTask, deleteTask, updateTask}}>
+        <SetListContext.Provider value={{list, setList, addTask, deleteTask, updateTask}}>
             {props.children}
         </SetListContext.Provider>
     );

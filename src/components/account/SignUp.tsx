@@ -36,15 +36,15 @@ const SignUp = ({ handleClick }: SignUpProps) => {
 
     const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const newAccount = { username, email, password, verifyPassword }
+        const signUpObj = { username, email, password, verifyPassword }
 
-        const response = await AccountSignUp(newAccount);
+        const response = await AccountSignUp(signUpObj);
         if(response && response.ok){
-            login(email);
+            login(response.user);
             navigate("../dashboard");
         }
-        if(response.error){
-            setMessage(response.error);
+        if(response.message){
+            setMessage(response.message);
         }
     }
     return (

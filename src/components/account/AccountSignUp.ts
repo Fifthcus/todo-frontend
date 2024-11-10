@@ -1,4 +1,3 @@
-import { useState } from 'react';
 interface newAccountObj {
     username: string,
     email: string
@@ -8,8 +7,9 @@ interface newAccountObj {
 
 interface ServerResponse {
     ok: boolean,
+    user?: any,
     statusCode: number,
-    error: string,
+    message: string,
 }
 
 const CreateAccount = async (account: newAccountObj): Promise<ServerResponse> => {
@@ -20,11 +20,11 @@ const CreateAccount = async (account: newAccountObj): Promise<ServerResponse> =>
             credentials: "include",
             body: JSON.stringify({username: account.username, email: account.email, password: account.password}),
         });
-        const json: {message: string} = await response.json();
-        return {ok: response.ok, statusCode: response.status, error: json.message};
+        const json: {message: string, user: any} = await response.json();
+        return {ok: response.ok, user: json.user, statusCode: response.status, message: json.message};
     } catch(error: any) {
         console.log(error);
-        return {ok: false, statusCode: 500, error: "An unexpected error occured."};
+        return {ok: false, statusCode: 500, message: "An unexpected error occured."};
     }
 }
 
