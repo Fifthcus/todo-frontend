@@ -27,7 +27,7 @@ interface SignUpProps {
 
     const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      const signInObj = { email, password }
+      const signInObj = { email, password };
 
       const response = await AccountSignIn(signInObj);
 

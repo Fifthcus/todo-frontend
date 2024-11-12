@@ -8,21 +8,13 @@ import AddTask from '../utils/lists/AddTask';
 
 const Dashboard = () => {
 
-  const { user, logout } = useAuth();
-  //If use is not logged in, redirect them back to login.
-  //Programatically navigate away to other components.
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  }
+  const { user } = useAuth();
 
   return (
     <SetListProvider>
       <section className='h-screen flex flex-col'>
         <Nav />
         <section className='flex flex-col flex-grow w-full md:w-11/12 lg:w-10/12 self-center p-10'>
-        <button onClick={handleLogout}>Logout</button>
           <section className='flex-grow'>
             <List username={user?.username}/>
           </section>

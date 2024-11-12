@@ -11,9 +11,9 @@ const List = ({username}: ComponentProps) => {
     const { list, setList } = useList();
     const fetchedData = useFetchList();
     const fetchedList = fetchedData.list;
-    useEffect(() => {
+    if(list.length === 0){
         setList(fetchedList);
-    },[]);
+    }
     return (
         <>
             <h2 className="text-center text-2xl font-medium pb-10">{username}'s List</h2>
