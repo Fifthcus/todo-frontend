@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import AccountCircleIcon from "../../assets/icons/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg";
-import Modal from './modals/modal';
+import Modal from './modals/Modal';
 import AccountMenu from './modals/AccountMenu';
 
 const Nav = () => {
