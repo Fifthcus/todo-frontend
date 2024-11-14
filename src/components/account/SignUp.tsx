@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AccountSignUp from './AccountSignUp';
 import { useAuth } from '../../hooks/useAuth';
@@ -9,7 +9,7 @@ interface SignUpProps {
 
 const SignUp = ({ handleClick }: SignUpProps) => {
    
-    // Collecting user data.
+    //Calculate user data to create the user an account.
     const [username, setUsername] = useState("");
     const handleUsernameInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value);
@@ -27,18 +27,16 @@ const SignUp = ({ handleClick }: SignUpProps) => {
         setVerifyPassword(event.target.value);
     }
 
-    //Programatically navigate away to other components.
+    //Handle signing up logic.
+    const { login } = useAuth();
     const navigate = useNavigate();
-
-    const {login} = useAuth();
-
     const [message, setMessage] = useState("");
 
     const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const signUpObj = { username, email, password, verifyPassword }
+        const userObjectToSignUp = { username, email, password, verifyPassword }
 
-        const response = await AccountSignUp(signUpObj);
+        const response = await AccountSignUp(userObjectToSignUp);
         if(response && response.ok){
             login(response.user);
             navigate("../dashboard");
@@ -64,7 +62,7 @@ const SignUp = ({ handleClick }: SignUpProps) => {
                 </form>
             </section>
             <section className='p-4 bg-neutral-50 w-11/12 md:w-7/12 lg:w-1/3 rounded-md'>
-                <p onClick={() => {handleClick(true)}} className='text-neutral-600 text-center cursor-pointer hover:underline'>Have an account?</p>
+                <p onClick={() => handleClick(true)} className='text-neutral-600 text-center cursor-pointer hover:underline'>Have an account?</p>
             </section>
         </section>
     </>

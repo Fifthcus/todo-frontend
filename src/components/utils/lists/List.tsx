@@ -1,18 +1,12 @@
-import Task from './Task';
 import { useList } from '../../../hooks/useList';
-import useFetchList from "../../../hooks/useFetchList";
+import Task from './Task';
 
 interface ComponentProps {
     username?: string,
 }
 
 const List = ({ username }: ComponentProps) => {
-    const { list, setList } = useList();
-    const fetchedData = useFetchList();
-    const fetchedList = fetchedData.list;
-    if(list.length === 0){
-        setList(fetchedList);
-    }
+    const { list } = useList();
     return (
         <>
             <h2 className="text-center text-2xl font-medium pb-10">{username}'s List</h2>

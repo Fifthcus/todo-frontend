@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
+import { useList } from '../../../hooks/useList'
 import Circle from './Circle'
 import More from '../../../assets/icons/more_vert_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg'
 import TaskOptionsMenu from './TaskOptionsMenu';
-import { useList } from '../../../hooks/useList'
 
 interface TaskProps {
     task: any,
     id: number,
 }
 
-const Task = ({task, id}: TaskProps) => {
+const Task = ({ task, id }: TaskProps) => {
     //Get list and other related functionality.
     const { list, updateTask } = useList();
     //Open and close task options menu.

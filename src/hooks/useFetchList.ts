@@ -10,7 +10,7 @@ interface ListItemObject {
 const useFetchList = () => {
     const { user } = useAuth();
     const id = user?.id;
-    const [list, setList] = useState<ListItemObject[]>([]);
+    const [data, setData] = useState<ListItemObject[]>([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -19,7 +19,7 @@ const useFetchList = () => {
                 const url = `http://localhost:3000/api/v1/${id}/list`;
                 const response = await fetch(url);
                 const json = await response.json();
-                setList(json.list);
+                setData(json.list);
             } catch(error: any) {
                 console.log(error);
                 setError(error);
@@ -29,7 +29,7 @@ const useFetchList = () => {
         }
         fetchData();
     },[]);
-    return {list, error, loading};
+    return {data, error, loading};
 }
 
 export default useFetchList;

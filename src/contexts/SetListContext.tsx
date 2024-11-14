@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import useFetchList from "../hooks/useFetchList";
 
 interface SetListObj {
     list: ListItemObject[],
@@ -19,7 +20,11 @@ interface SetListProps {
 export const SetListContext = createContext<SetListObj | undefined>(undefined);
 
 export const SetListProvider: React.FC<SetListProps> = (props) => {
+    const { data } = useFetchList();
     const [list, setList] = useState<ListItemObject[]>([]);
+    useEffect(() => {
+        setList(data);
+    },[data]);
     //Add a test to the todo list.
     const addTask = (taskObj: ListItemObject) => {
         setList([...list, taskObj]);

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AccountSignIn from './AccountSignIn';
 import { useAuth } from '../../hooks/useAuth';
@@ -7,8 +7,9 @@ interface SignUpProps {
   handleClick: (isOpen: boolean) => void,
 }
 
-//This is annotated the way it is to ensure the components props are inferred and eforces the type of a components props.
   const SignIn = ({ handleClick }: SignUpProps) => {
+
+    //Calculate user data when signing into website.
     const [email, setEmail] = useState("");
     const handleEmailInput = (event: React.ChangeEvent<HTMLInputElement>) => {
       setEmail(event.target.value);
@@ -18,18 +19,16 @@ interface SignUpProps {
       setPassword(event.target.value);
     }
 
-    //Programatically navigate away to other components.
+    //Handle signing in logic.
+    const { login } = useAuth();
     const navigate = useNavigate();
-
-    const {login} = useAuth();
-
     const [message, setMessage] = useState("");
 
     const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      const signInObj = { email, password };
+      const userObjectToSignIn = { email, password };
 
-      const response = await AccountSignIn(signInObj);
+      const response = await AccountSignIn(userObjectToSignIn);
 
       if(response && response.ok){
         login(response.user);
@@ -53,7 +52,7 @@ interface SignUpProps {
           </form>
         </section>
         <section className='p-4 bg-neutral-50 w-11/12 md:w-7/12 lg:w-1/3 rounded-md'>
-          <p onClick={() => {handleClick(false)}} className='text-neutral-600 text-center cursor-pointer hover:underline'>Create an account?</p>
+          <p onClick={() => handleClick(false)} className='text-neutral-600 text-center cursor-pointer hover:underline'>Create an account?</p>
         </section>
       </section>
     </>

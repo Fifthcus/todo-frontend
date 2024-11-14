@@ -1,6 +1,6 @@
-import Close from '../../../assets/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../hooks/useAuth';
+import Close from '../../../assets/icons/close_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg';
 
 interface AccountMenuProps {
     closeModalOnClick: (arg: boolean) => void;
@@ -23,7 +23,7 @@ const AccountMenu = ({ closeModalOnClick }: AccountMenuProps) => {
         }
     }
     return (
-        <section className='flex flex-col px-4 py-4 bg-slate-50 rounded-lg'>
+        <section onClick={(event) => event.stopPropagation()} className='flex flex-col px-4 py-4 bg-slate-50 rounded-lg'>
             <section className='flex justify-end'>
                 <img src={Close} onClick={() => closeModalOnClick(false)} className="cursor-pointer" title="Close menu." alt="An icon to close this account menu."/>
             </section>

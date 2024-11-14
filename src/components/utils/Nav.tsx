@@ -12,13 +12,13 @@ const Nav = () => {
         </section>
         <section className='flex justify-end w-2/4'>
             <img src={AccountCircleIcon} onClick={() => setIsModalOpen(true)} className="cursor-pointer" alt="Account circle icon." />
-            {isModalOpen ? 
-              <Modal closeModalOnClick={setIsModalOpen}>
-                <AccountMenu closeModalOnClick={setIsModalOpen}/>
-              </Modal> : null}
+            {isModalOpen && 
+            <Modal closeModalOnClick={setIsModalOpen}>
+              <AccountMenu closeModalOnClick={setIsModalOpen}/>
+            </Modal>}
         </section>
     </nav>
   )
 }
 
-export default Nav
+export default Nav;
