@@ -3,7 +3,7 @@ import { useAuth } from '../hooks/useAuth';
 
 interface ListItemObject {
     id: number,
-    isCompleted: boolean,
+    iscompleted: boolean,
     task: string,
 }
 
@@ -16,7 +16,7 @@ const useFetchList = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const url = `http://localhost:3000/api/v1/${id}/list`;
+                const url = `http://localhost:3000/api/v1/list/${id}`;
                 const response = await fetch(url);
                 const json = await response.json();
                 setData(json.list);

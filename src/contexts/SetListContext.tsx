@@ -2,15 +2,15 @@ import { createContext, useEffect, useState } from "react";
 import useFetchList from "../hooks/useFetchList";
 
 interface SetListObj {
-    list: ListItemObject[],
-    setList: ([]: ListItemObject[]) => void,
-    addTask: (userObj: ListItemObject) => void,
+    list: TaskObject[],
+    setList: ([]: TaskObject[]) => void,
+    addTask: (userObj: TaskObject) => void,
     deleteTask: (id: number) => void,
-    updateTask: (newList: ListItemObject[]) => void,
+    updateTask: (id: number, newList: TaskObject[], task: TaskObject, whatIsBeingUpdated: string) => void,
 }
-interface ListItemObject {
+interface TaskObject {
     id: number,
-    isCompleted: boolean,
+    iscompleted: boolean,
     task: string,
 }
 interface SetListProps {
@@ -21,25 +21,48 @@ export const SetListContext = createContext<SetListObj | undefined>(undefined);
 
 export const SetListProvider: React.FC<SetListProps> = (props) => {
     const { data } = useFetchList();
-    const [list, setList] = useState<ListItemObject[]>([]);
+    const [list, setList] = useState<TaskObject[]>([]);
     useEffect(() => {
         setList(data);
     },[data]);
     //Add a test to the todo list.
-    const addTask = (taskObj: ListItemObject) => {
+    const addTask = (taskObj: TaskObject) => {
         setList([...list, taskObj]);
     }
     //With the filter method, delete a task from the todo list.
-    const deleteTask = (id: number) => {
+    const deleteTask = async (id: number) => {
         const filteredList = list.filter((task) => task.id !== id);
-        setList(filteredList);
+        try {
+            await fetch(`http://localhost:3000/api/v1/list/task/${id}`, {
+                method: "DELETE",
+                credentials: "include",
+            });
+            setList(filteredList);
+        } catch(error) {
+            console.error(error);
+            setList(list);
+        }
     }
     //Update task from user provided input.
-    const updateTask = (newList: ListItemObject[]) => {
-        setList(newList);
+    const updateTask = async (id: number, newList: TaskObject[], task: TaskObject, whatIsBeingUpdated: string) => {
+        try {
+            console.log(task);
+            await fetch(`http://localhost:3000/api/v1/list/task/${id}`, {
+                method: "PUT",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ task, whatIsBeingUpdated }),
+            });
+            setList(newList);
+        } catch(error) {
+            console.error(error);
+            setList(list);
+        }
     }
     return(
-        <SetListContext.Provider value={{list, setList, addTask, deleteTask, updateTask}}>
+        <SetListContext.Provider value={{ list, setList, addTask, deleteTask, updateTask }}>
             {props.children}
         </SetListContext.Provider>
     );

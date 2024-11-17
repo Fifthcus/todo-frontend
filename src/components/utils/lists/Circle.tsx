@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 interface CircleProps {
   task: any,
@@ -6,7 +6,7 @@ interface CircleProps {
 }
 
 const Circle = ({task, completeTask}: CircleProps): JSX.Element => {
-    const [isCompleted, setIsCompleted] = useState<boolean>(task.isCompleted);
+    const [isCompleted, setIsCompleted] = useState<boolean>(task.iscompleted);
     const color = "#907AD6";
     const radius = 12.5;
     const handleClick = (status: boolean) => {

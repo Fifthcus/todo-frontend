@@ -33,33 +33,40 @@ const Task = ({ task, id }: TaskProps) => {
     const updateTaskFromInput = (event: React.FormEvent, id: number) => {
         event.preventDefault();
         const newList = list.map((task) => {
-            if(task.id === id) return {id: task.id, isCompleted: task.isCompleted, task: editTaskText}
+            if(task.id === id) {
+                return {...task, task: editTaskText}
+            }
             return task;
         });
-        updateTask(newList);
+        const findTaskInNewList = newList.find((task) => task.id === id);
+        const whatIsBeingUpdated = "task";
+        updateTask(id, newList, findTaskInNewList!, whatIsBeingUpdated);
         openCloseUpdateTaskInput(event, false); //Close edit task input menu
         openCloseTaskOptionsMenu(event, false);
     }
     //Update circle list on whether or not a task is complete
     const completeTask = (id: number, taskCompletionStatus: boolean) => {
         const newList = list.map((task) => {
-            console.log(taskCompletionStatus);
-            if(task.id === id) return {id: task.id, isCompleted: taskCompletionStatus, task: task.task}
+            if(task.id === id) {
+                return {...task, iscompleted: taskCompletionStatus}
+            }
             return task;
         });
-        updateTask(newList);
+        const whatIsBeingUpdated = "status";
+        const findTaskInNewList = newList.find((task) => task.id === id);
+        updateTask(id, newList, findTaskInNewList!, whatIsBeingUpdated);
     }
     return (
     <li className="flex items-center w-full py-2">
-        <Circle task={task} completeTask={completeTask}/>
+        <Circle task={task} completeTask={ completeTask }/>
         {openCloseEditTaskMenu ? 
-        <form className="flex-grow text-xl px-8 flex gap-2.5" onSubmit={(event) => updateTaskFromInput(event, id)}>
-            <input className="flex-grow text-lg border-2 border-gray-500 rounded-lg pl-2" value={editTaskText} onChange={changeEditTaskText} type="text" placeholder='Update task...'/>
+        <form className="flex-grow text-xl px-8 flex gap-2.5" onSubmit={ (event) => updateTaskFromInput(event, id) }>
+            <input className="flex-grow text-lg border-2 border-gray-500 rounded-lg pl-2" value={ editTaskText } onChange={ changeEditTaskText } type="text" placeholder='Update task...'/>
             <button className='text-neutral-50 bg-pastel-purple border-2 border-pastel-purple rounded-lg py-0.5 px-5'>Submit</button>
         </form> : null}
         {openCloseEditTaskMenu ? null : <p className='flex-grow text-xl pl-5'>{task.task}</p>}
-        {isTaskOptionsMenuOpen ? <TaskOptionsMenu openCloseTaskOptionsMenu={openCloseTaskOptionsMenu} openCloseUpdateTaskInput={openCloseUpdateTaskInput} setEditTask={setOpenCloseEditTaskMenu} id={id} /> :
-        <img onClick={(event) => openCloseTaskOptionsMenu(event, true)} className="cursor-pointer p-2" src={More} alt="Three vertical dots." />
+        {isTaskOptionsMenuOpen ? <TaskOptionsMenu openCloseTaskOptionsMenu={ openCloseTaskOptionsMenu } openCloseUpdateTaskInput={ openCloseUpdateTaskInput } setEditTask={ setOpenCloseEditTaskMenu } id={ id } /> :
+        <img onClick={ (event) => openCloseTaskOptionsMenu(event, true) } className="cursor-pointer p-2" src={More} alt="Three vertical dots." />
         }
     </li>)
 }

@@ -13,12 +13,12 @@ const AddTask = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if(list.length === 0){
-            addTask({id: 1, isCompleted: false, task: taskInput});
+            addTask({id: 1, iscompleted: false, task: taskInput});
             setTaskInput("");
         }
         if(list.length >= 1){
             const id_of_last_index = list[list.length - 1].id;
-            addTask({id: id_of_last_index + 1, isCompleted: false, task: taskInput});
+            addTask({id: id_of_last_index + 1, iscompleted: false, task: taskInput});
             setTaskInput("");
         }
         try {
@@ -29,7 +29,7 @@ const AddTask = () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({user:{ id }, isCompleted: false, task: taskInput})
+                body: JSON.stringify({user:{ id }, iscompleted: false, task: taskInput})
             })
             if(!response.ok){
                 window.setTimeout(() => {
