@@ -5,6 +5,7 @@ interface UserAuthObj {
     login: ({}: UserObj) => void,
     logout: () => void,
     isAuth: boolean,
+    setIsAuth: (isAuth: boolean) => void,
 }
 interface UserObj {
     id?: number,
@@ -31,7 +32,7 @@ export const AuthProvider: React.FC<AuthProps> = (props) => {
     }
     const [isAuth, setIsAuth] = useState(false);
     return(
-        <AuthContext.Provider value={{user, login, logout, isAuth}}>
+        <AuthContext.Provider value={{user, login, logout, isAuth, setIsAuth}}>
             {props.children}
         </AuthContext.Provider>
     );

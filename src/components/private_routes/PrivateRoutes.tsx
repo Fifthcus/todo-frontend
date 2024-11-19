@@ -9,7 +9,7 @@ interface PrivateRoutesProps {
 const PrivateRoutes = ({children}: PrivateRoutesProps) => {
     const {isAuth} = useAuth();
     if(!isAuth) {
-        <Navigate to="/" />
+        <Navigate to="/" state={{ from: location }} replace/>
     } else {
         return children;
     }
