@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Navigate, Outlet } from 'react-router-dom';
+import { useEffect } from "react";
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 interface PrivateRoutesProps {
@@ -7,7 +7,6 @@ interface PrivateRoutesProps {
 }
 
 const PublicRoutes = ({ children }: PrivateRoutesProps) => {
-    const [isLoading, setIsLoading] = useState(true);
     const { login, isAuth } = useAuth();
     //Verify refresh token
     useEffect(() => {
@@ -24,11 +23,8 @@ const PublicRoutes = ({ children }: PrivateRoutesProps) => {
             } catch(error) {
                 console.error(error);
             }
-            finally {
-                setIsLoading(false);
-            } 
         }
-        {!isAuth ? verifyRefreshToken() : setIsLoading(false);}
+        {!isAuth ? verifyRefreshToken() : null}
     },[]);
     if(isAuth) {
         return <Navigate to="/dashboard"/>

@@ -1,4 +1,3 @@
-import React from "react";
 import LogInSignUp from "./LogInSignUp";
 const App = () => {
   return (
