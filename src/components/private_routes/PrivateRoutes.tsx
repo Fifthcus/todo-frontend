@@ -6,10 +6,10 @@ interface PrivateRoutesProps {
     children: React.ReactNode;
 }
 
-const PrivateRoutes = ({children}: PrivateRoutesProps) => {
-    const {isAuth} = useAuth();
+const PrivateRoutes = ({ children }: PrivateRoutesProps) => {
+    const { isAuth } = useAuth();
     if(!isAuth) {
-        <Navigate to="/" state={{ from: location }} replace/>
+        <Navigate to="/"/>
     } else {
         return children;
     }

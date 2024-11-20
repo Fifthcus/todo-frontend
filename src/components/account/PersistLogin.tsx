@@ -28,7 +28,7 @@ const PersistLogin = () => {
     },[]);
     return (
         <>
-            {isLoading ? "Loading..."  : <Outlet />}
+            {isLoading ? "Loading..." : <Outlet />}
         </>
     )
 }
