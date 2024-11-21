@@ -12,6 +12,7 @@ const PersistLogin = () => {
                 const response = await fetch("http://localhost:3000/user/persist", {
                     method: "POST",
                     credentials: "include",
+                    body: JSON.stringify({ persist: true }),
                 });
                 const json = await response.json();
                 if(response.ok){

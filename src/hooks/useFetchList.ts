@@ -17,7 +17,9 @@ const useFetchList = () => {
         const fetchData = async () => {
             try {
                 const url = `http://localhost:3000/api/v1/list/${id}`;
-                const response = await fetch(url);
+                const response = await fetch(url, {
+                    credentials: "include"
+                });
                 const json = await response.json();
                 setData(json.list);
             } catch(error: any) {
