@@ -1,10 +1,23 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '../../hooks/useAuth';
-import { Outlet } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-const PersistLogin = () => {
+interface PersistLoginProps {
+    children?: JSX.Element
+}
+
+const PersistLogin = ({ children }: PersistLoginProps) => {
     const [isLoading, setIsLoading] = useState(true);
     const { login, isAuth } = useAuth();
+    const navigate = useNavigate();
+
+    //Prevent user from visiting dashboard component while not authenticated.
+    useEffect(() => {
+        if (!isAuth) {
+          console.log(`isAuth: ${isAuth}`);
+          navigate("../");
+        }
+      }, [isAuth]);
     //Verify refresh token
     useEffect(() => {
         const verifyRefreshToken = async () => {
@@ -32,7 +45,7 @@ const PersistLogin = () => {
     },[]);
     return (
         <>
-            { isLoading ? "Loading..." : <Outlet /> }
+            { isLoading ? "Loading..." : isAuth ? children : navigate("/") }
         </>
     )
 }

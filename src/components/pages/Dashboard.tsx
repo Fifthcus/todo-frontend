@@ -4,7 +4,7 @@ import Nav from '../utils/Nav';
 import List from '../utils/lists/List';
 import AddTask from '../utils/lists/AddTask';
 
-const Dashboard = () => {
+const Dashboard = (): JSX.Element => {
 
   const { user } = useAuth();
 
