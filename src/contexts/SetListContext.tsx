@@ -46,7 +46,6 @@ export const SetListProvider: React.FC<SetListProps> = (props) => {
     //Update task from user provided input.
     const updateTask = async (id: number, newList: TaskObject[], task: TaskObject, whatIsBeingUpdated: string) => {
         try {
-            console.log(task);
             await fetch(`http://localhost:3000/api/v1/list/task/${id}`, {
                 method: "PUT",
                 credentials: "include",
