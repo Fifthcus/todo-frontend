@@ -31,7 +31,7 @@ const useFetchList = () => {
         }
         fetchData();
     },[]);
-    return {data, error, loading};
+    return { data, error, loading };
 }
 
 export default useFetchList;
